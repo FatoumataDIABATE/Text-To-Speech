@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {API_CONFIG} from "../../config.js";
+import { API_CONFIG } from "../config";
 
 const TextToSpeech = () => {
     const [text, setText] = useState("");
