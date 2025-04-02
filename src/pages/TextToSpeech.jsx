@@ -71,57 +71,83 @@ const TextToSpeech = () => {
         }
     };
 
-
     return (
-        <div className="p-6 max-w-xl mx-auto space-y-4">
-            <h1 className="text-2xl font-bold">Text to Speech</h1>
+        <div className="p-6 max-w-3xl mx-auto space-y-6 bg-white shadow-md rounded-xl mt-6">
+            <h1 className="text-3xl font-bold text-purple-700 text-center">Convertisseur Text-to-Speech</h1>
 
             <textarea
-                className="w-full p-2 border rounded"
+                className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 transition"
                 rows={5}
                 placeholder="Entrez votre texte ici..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             />
 
-            <div className="flex flex-col gap-2 md:flex-row md:gap-4">
-                <select value={voice} onChange={(e) => setVoice(e.target.value)}>
-                    <option value="female">Féminine</option>
-                    <option value="male">Masculine</option>
-                    <option value="robotic">Robotique</option>
-                </select>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Voix</label>
+                    <select
+                        value={voice}
+                        onChange={(e) => setVoice(e.target.value)}
+                        className="w-full p-2 border border-gray-300 rounded-lg"
+                    >
+                        <option value="female">Féminine</option>
+                        <option value="male">Masculine</option>
+                        <option value="robotic">Robotique</option>
+                    </select>
+                </div>
 
-                <select value={speed} onChange={(e) => setSpeed(e.target.value)}>
-                    <option value="slow">Lent</option>
-                    <option value="normal">Normal</option>
-                    <option value="fast">Rapide</option>
-                </select>
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Vitesse</label>
+                    <select
+                        value={speed}
+                        onChange={(e) => setSpeed(e.target.value)}
+                        className="w-full p-2 border border-gray-300 rounded-lg"
+                    >
+                        <option value="slow">Lent</option>
+                        <option value="normal">Normal</option>
+                        <option value="fast">Rapide</option>
+                    </select>
+                </div>
 
-                <select value={pitch} onChange={(e) => setPitch(e.target.value)}>
-                    <option value="low">Grave</option>
-                    <option value="medium">Moyenne</option>
-                    <option value="high">Aiguë</option>
-                </select>
+                <div>
+                    <label className="block mb-1 font-medium text-gray-700">Tonalité</label>
+                    <select
+                        value={pitch}
+                        onChange={(e) => setPitch(e.target.value)}
+                        className="w-full p-2 border border-gray-300 rounded-lg"
+                    >
+                        <option value="low">Grave</option>
+                        <option value="medium">Moyenne</option>
+                        <option value="high">Aiguë</option>
+                    </select>
+                </div>
             </div>
 
             <button
                 onClick={handleConvert}
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                className="w-full bg-purple-600 text-white px-4 py-3 rounded-lg hover:bg-purple-700 transition font-semibold"
                 disabled={loading}
             >
-                {loading ? "Conversion..." : "Convertir en audio"}
+                {loading ? "Conversion en cours..." : "Convertir en audio"}
             </button>
 
             {audioUrl && (
-                <div className="mt-4">
-                    <audio controls src={audioUrl} className="w-full" />
-                    <a href={audioUrl} download="audio.mp3" className="text-blue-500 underline">
-                        Télécharger
+                <div className="mt-6 border-t pt-4">
+                    <audio controls src={audioUrl} className="w-full mb-2" />
+                    <a
+                        href={audioUrl}
+                        download="audio.mp3"
+                        className="text-purple-600 hover:underline font-medium"
+                    >
+                        Télécharger l'audio
                     </a>
                 </div>
             )}
         </div>
     );
+
+
 };
 
 export default TextToSpeech;
