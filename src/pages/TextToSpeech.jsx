@@ -15,6 +15,14 @@ const TextToSpeech = () => {
         setAudioUrl(null);
 
         try {
+
+            let voiceName = "fr-FR-Wavenet-E";
+            if (voice === "male") {
+                voiceName = "fr-FR-Wavenet-B";
+            } else if (voice === "robotic") {
+                voiceName = "fr-FR-Standard-B";
+            }
+
             const response = await fetch(
                 `${API_CONFIG.BASE_URL}${API_CONFIG.API_KEY}`,//TODO ${API_KEY} Pour var d'env
                 {
@@ -26,7 +34,7 @@ const TextToSpeech = () => {
                         input: { text },
                         voice: {
                             languageCode: "fr-FR",
-                            name: "fr-FR-Wavenet-E", // voix féminine naturelle
+                            name: voiceName,
                         },
                         audioConfig: {
                             audioEncoding: "MP3",
